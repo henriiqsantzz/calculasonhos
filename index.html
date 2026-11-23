@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responda para continuar</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #161823;
+    --muted: #86878b;
+    --line: #e3e3e4;
+    --red: #FE2C55;
+    --cyan: #25F4EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  main { width: 100%; max-width: 360px; text-align: center; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  p.sub { color: var(--muted); font-size: 15px; margin-bottom: 28px; }
+  input {
+    width: 100%;
+    background: #f8f8f8;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 20px;
+    text-align: center;
+    padding: 15px;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  input:focus { border-color: var(--text); background: #fff; }
+  input::placeholder { color: #b5b6b9; }
+  button {
+    width: 100%;
+    margin-top: 14px;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 15px;
+    cursor: pointer;
+    transition: filter .2s, transform .1s;
+  }
+  button:hover { filter: brightness(.95); }
+  button:active { transform: scale(.98); }
+  .erro { color: var(--red); font-size: 14px; margin-top: 12px; min-height: 18px; }
+  .bar { width: 40px; height: 4px; margin: 0 auto 24px; border-radius: 2px;
+         background: linear-gradient(90deg, var(--cyan) 50%, var(--red) 50%); }
+</style>
+
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+  ttq.load('DC1LGKRC77U4QHD89A00');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+</head>
+<body>
+  <main>
+    <div class="bar"></div>
+    <h1>Quanto é 1 + 1?</h1>
+    <p class="sub">Digite a resposta e clique em enviar.</p>
+    <input id="resposta" type="number" inputmode="numeric" placeholder="Sua resposta" autocomplete="off">
+    <button id="enviar" type="button">Enviar</button>
+    <div class="erro" id="erro"></div>
+  </main>
+
+<script>
+  // CONFIGURAÇÃO
+  var LINK = "https://seulink.com";   // troque pelo seu link
+  var EXIGIR_RESPOSTA_CERTA = true;   // true = só redireciona se digitar 2
+
+  var input = document.getElementById("resposta");
+  var erro = document.getElementById("erro");
+
+  function enviar() {
+    var valor = input.value.trim();
+    if (valor === "") { erro.textContent = "Digite sua resposta primeiro."; return; }
+    if (EXIGIR_RESPOSTA_CERTA && valor !== "2") { erro.textContent = "Resposta incorreta. Digite o valor certo para continuar."; input.value = ""; input.focus(); return; }
+    try { ttq.track("ClickButton"); } catch (e) {}
+    setTimeout(function () { window.location.href = LINK; }, 400);
+  }
+
+  document.getElementById("enviar").addEventListener("click", enviar);
+  input.addEventListener("keydown", function (e) { if (e.key === "Enter") enviar(); });
+</script>
+</body>
+</html>
