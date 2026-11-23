@@ -86,18 +86,31 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
 <script>
   // CONFIGURAÇÃO
-  var LINK = "https://seulink.com";   // troque pelo seu link
+  var LINK = "https://realizandosonhos.vercel.app/1";   // troque pelo seu link
   var EXIGIR_RESPOSTA_CERTA = true;   // true = só redireciona se digitar 2
 
   var input = document.getElementById("resposta");
   var erro = document.getElementById("erro");
+
+  // Repassa UTMs, ttclid e qualquer parâmetro da URL atual para o link de destino
+  function montarLink() {
+    try {
+      var destino = new URL(LINK);
+      new URLSearchParams(window.location.search).forEach(function (valor, chave) {
+        destino.searchParams.set(chave, valor);
+      });
+      return destino.toString();
+    } catch (e) {
+      return LINK;
+    }
+  }
 
   function enviar() {
     var valor = input.value.trim();
     if (valor === "") { erro.textContent = "Digite sua resposta primeiro."; return; }
     if (EXIGIR_RESPOSTA_CERTA && valor !== "2") { erro.textContent = "Resposta incorreta. Digite o valor certo para continuar."; input.value = ""; input.focus(); return; }
     try { ttq.track("ClickButton"); } catch (e) {}
-    setTimeout(function () { window.location.href = LINK; }, 400);
+    setTimeout(function () { window.location.href = montarLink(); }, 400);
   }
 
   document.getElementById("enviar").addEventListener("click", enviar);
